@@ -1,4 +1,4 @@
-import ForceGraph3D from '3d-force-graph';
+// import * as THREE from 'three';
 import * as THREE from 'three';
 import { forceX, forceY, forceZ, forceManyBody, forceCollide } from 'd3-force-3d';
 import { filterNodesAndLinks } from './data.js';
@@ -24,7 +24,7 @@ const extensionColors = {
 
 
 export function createGraph(container) {
-    const graph = ForceGraph3D()(container)
+    const graph = window.ForceGraph3D()(container)
     .backgroundColor('#1c1919')
     //.nodeColor('Extension')
     .nodeColor(node => {
