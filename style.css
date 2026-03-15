@@ -1,0 +1,226 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #1c1919;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+#3d-graph {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.control-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 10;
+  background: transparent;
+  padding: 32px 40px 0 40px;
+  box-sizing: border-box;
+}
+
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 320px;
+  position: relative;
+}
+
+.slider-label {
+  font-size: 10px;
+  font-weight: bold;
+  color: #fff;
+  font-style: italic;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+
+.slider-sublabel {
+  font-size: 10px;
+  color: #fff;
+  margin-bottom: 18px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.slider {
+  width: 200px;
+  accent-color: #fff;
+  margin-bottom: 5px;
+}
+
+.slider-value {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  position: absolute;
+  top: 20px; /* Ajuste selon la hauteur du slider */
+  left: 0;
+  pointer-events: none;
+  width: auto;
+}
+.toggles-container {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: flex-start;
+  margin-top: 0;
+}
+
+.toggle-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 30px;
+}
+
+.toggle-label {
+  font-size: 10px;
+  font-weight: bold;
+  color: #fff;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.toggle-switch {
+  width: 48px;
+  height: 24px;
+  background: #444;
+  border-radius: 12px;
+  position: relative;
+  cursor: pointer;
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  transition: background 0.2s;
+}
+
+.toggle-switch.active {
+  background: #e74c3c;
+}
+
+.toggle-knob {
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  transition: left 0.2s;
+}
+
+.toggle-switch.active .toggle-knob {
+  left: 26px;
+  background: #fff;
+}
+
+.toggle-mode {
+  font-size: 10px;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 4px;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+/* Toggle 3 états — scoped au panneau pour ne pas toucher #toggleSwitch (auto-orbit) */
+.control-panel .toggle-switch.toggle-3 {
+  position: relative;
+  width: 84px;
+  height: 28px;
+  background: #444;
+  border: 1px solid #555;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px #0006;
+}
+.control-panel .toggle-switch.toggle-3 .toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #eee;
+  box-shadow: 0 1px 3px #0008;
+  transition: left .2s ease;
+}
+.control-panel .toggle-switch.toggle-3[data-mode="arbo"] .toggle-knob { left: calc(50% - 12px); }
+.control-panel .toggle-switch.toggle-3[data-mode="year"] .toggle-knob { left: calc(100% - 26px); }
+/* Couleurs par mode */
+.control-panel .toggle-switch.toggle-3[data-mode="folders"] { background: #555; }
+.control-panel .toggle-switch.toggle-3[data-mode="arbo"]    { background: #6a3; }
+.control-panel .toggle-switch.toggle-3[data-mode="year"]    { background: #2d6cdf; }
+/* Neutralise l’ancien .active (2 états) uniquement dans le panneau */
+.control-panel .toggle-switch.toggle-3.active .toggle-knob { left: 2px; }
+
+
+#node-tooltip {
+  background: #222;
+  position: fixed;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  pointer-events: none;
+  white-space: pre-line;
+  max-width: 350px;
+  box-shadow: 0 2px 8px #000a;
+  z-index: 9999;
+  display: block !important;
+}
+
+#node-tooltip:empty {
+  display: none !important;
+}
+
+.export-btn {
+  appearance: none;
+  background: #2b2b2b;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background .2s, border-color .2s;
+  margin-left: 12px;
+}
+.export-btn:hover {
+  background: #333;
+  border-color: #666;
+}
+.export-fab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid #444;
+  background: #2b2b2bcc;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  backdrop-filter: blur(6px);
+  transition: background .2s, border-color .2s, transform .05s ease;
+}
+.export-fab:hover { background: #333; border-color: #666; }
+.export-fab:active { transform: scale(0.98); }
+.export-fab svg { display: block; }

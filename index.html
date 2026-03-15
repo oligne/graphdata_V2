@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Graphique 3D</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="control-panel">
+    <div class="slider-container">
+      <div class="slider-label">POURCENTAGE DE DONNÉES</div>
+      <div class="slider-sublabel" id="sliderInfo">Soit XXXX Fichiers et XXX Dossiers</div>
+      <div style="position: relative; width: 100%;">
+        <input type="range" id="dataRange" min="10" max="100" value="10" step="10" class="slider">
+        <div id="sliderValue" class="slider-value" style="position: absolute; top: 38px; left: 0;">10%</div>
+      </div>
+    </div>
+    <div class="toggles-container">
+      <div class="toggle-group">
+        <span class="toggle-label">SOURIS</span>
+        <div class="toggle-switch" id="toggleSwitch">
+          <div class="toggle-knob"></div>
+        </div>
+        <span class="toggle-mode">ROTATION AUTO</span>
+      </div>
+      <div class="toggle-group">
+        <span class="toggle-label">DOSSIERS</span>
+        <div class="toggle-switch" id="toggleFolderLinks">
+          <div class="toggle-knob"></div>
+        </div>
+        <span class="toggle-mode">ARBORESCENCE</span>
+      </div>
+    </div>
+  </div>
+  <div id="3d-graph"></div>
+  <div id="node-tooltip"></div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
+
+
